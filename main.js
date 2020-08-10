@@ -42,7 +42,7 @@ for(const glyph of likeHeart){
   glyph.addEventListener('click', likeTheHeart)
 }
 
-
+// come back to this and redo 
 
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
