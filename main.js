@@ -5,7 +5,57 @@ const FULL_HEART = '♥'
 // Your JavaScript code goes here!
 
 
+const heartChange = heart => {
+  if (heart.classList.contains('activated-heart')) {
+    heart.classList.remove('activated-heart')
+    heart.innerText = EMPTY_HEART
+  
+  } else {
+    heart.innerText = FULL_HEART
+    heart.classList.add('activated-heart')
+  }
+}
 
+const likes = document.getElementsByClassName('like-glyph')
+for (const like of likes) {
+  like.addEventListener('click', (e) => handleClick(e)) 
+}
+
+// erroring out 
+
+const handleClick = (e) => {
+  mimicServerCall().then((res) => {
+    alert(res)
+    heartChange(e.target)
+  })
+  .catch((error) => {
+    modalError() 
+    alert(error)
+  })
+}
+
+const modalError = () => {
+  const modal = document.getElementById('modal') 
+  modal.classList.remove('hidden')
+  setTimeout(() => modal.classList.add('hidden'), 5000)
+}
+
+// * When a user clicks on an empty heart ("Recognizing events")
+//   * Invoke `mimicServerCall` to simulate making a server request
+//     * `mimicServerCall` randomly fails to simulate faulty network conditions
+//     * When the server returns a failure status
+//       * Respond to the error using a `.catch(() => {})` block after your
+//         `.then(() => {})` block.
+//       * Display the error modal by removing the `.hidden` class
+//       * Display the server error message in the modal
+//       * Use `setTimeout` to hide the modal after 5 seconds (add the `.hidden` class)
+//     * When the server returns a success status
+//       * Change the heart to a full heart
+//       * Add the `.activated-heart` class to make the heart appear red
+// * When a user clicks on a full heart
+//   * Change the heart back to an empty heart
+//   * Remove the `.activated-heart` class
+// * Keep all your styling rules entirely in `style.css`. Do not manipulate any `.style` properties.
 
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
